@@ -35,12 +35,9 @@ export default function DashboardLayout({
         setShowTemporarySidebar={setShowTemporarySidebar}
       />
       <Stack direction="row" position="relative" height="calc(100dvh - 70px)">
-        <Box
-        // position="sticky" alignSelf="flex-start" top="64px" left="0"
-        >
+        <Box>
           <Stack
             direction="row"
-            // minHeight="450px"
             height="100%"
             flexGrow="1"
             sx={{ overflowX: "hidden" }}

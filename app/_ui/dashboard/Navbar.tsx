@@ -19,7 +19,7 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import Logo from "../common/Logo";
 import Link from "next/link";
