@@ -1,12 +1,17 @@
 // "use client";
 import {
   Box,
+  Grow,
   List,
+  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   ListSubheader,
+  Stack,
   SxProps,
+  Typography,
+  useMediaQuery,
 } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
@@ -21,6 +26,8 @@ import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlin
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Logo from "../common/Logo";
+import { useTheme } from "@mui/material/styles";
 
 type SidebarLinkType = {
   label: String;
@@ -92,9 +99,10 @@ const sidebarLinks: SidebarLink = {
   },
 };
 
-export default function Sidebar() {
+export default function Sidebar({ children }: { children?: React.ReactNode }) {
   const pathname = usePathname();
-
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <List
       sx={{
@@ -105,6 +113,8 @@ export default function Sidebar() {
       component="nav"
       aria-labelledby="nested-list-subheader"
     >
+      {children}
+
       {Object.keys(sidebarLinks).map((key, i) => (
         <Box key={key + String(i)}>
           {sidebarLinks[key].label && (

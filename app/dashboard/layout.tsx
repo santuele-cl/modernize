@@ -1,6 +1,4 @@
 "use client";
-
-import { Metadata } from "next";
 import Sidebar from "../_ui/dashboard/Sidebar";
 import Navbar from "../_ui/dashboard/Navbar";
 import {
@@ -14,11 +12,6 @@ import {
 import { useEffect, useState } from "react";
 import TemporaryDrawer from "../_ui/dashboard/TemporaryDrawer";
 
-// export const metadata: Metadata = {
-//   title: "Modernize : Dashboard",
-//   description: "Modernize dashboard",
-// };
-
 export default function DashboardLayout({
   children,
 }: Readonly<{
@@ -27,29 +20,38 @@ export default function DashboardLayout({
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [showSidebar, setShowSidebar] = useState(false);
   const [showTemporarySidebar, setShowTemporarySidebar] = useState(false);
 
   useEffect(() => {
-    setShowSidebar(!isSmallScreen);
+    setShowTemporarySidebar(false);
   }, [isSmallScreen]);
 
   return (
     <Box position="relative">
       <Navbar setShowTemporarySidebar={setShowTemporarySidebar} />
       <TemporaryDrawer
+        isSmallScreen={isSmallScreen}
         showTemporarySidebar={showTemporarySidebar}
         setShowTemporarySidebar={setShowTemporarySidebar}
       />
-      <Stack direction="row" position="relative">
-        <Box position="sticky" top="64px" left="0" alignSelf="flex-start">
+      <Stack direction="row" position="relative" height="calc(100dvh - 70px)">
+        <Box
+        // position="sticky" alignSelf="flex-start" top="64px" left="0"
+        >
           <Stack
             direction="row"
-            minHeight="calc(100dvh - 64px)"
+            // minHeight="450px"
+            height="100%"
+            flexGrow="1"
+            sx={{ overflowX: "hidden" }}
             bgcolor="general"
             borderRight="1px solid rgba(0,0,0,.1)"
           >
-            <Collapse in={showSidebar} orientation="horizontal" timeout={500}>
+            <Collapse
+              in={!isSmallScreen}
+              orientation="horizontal"
+              timeout={500}
+            >
               <Sidebar />
             </Collapse>
           </Stack>
